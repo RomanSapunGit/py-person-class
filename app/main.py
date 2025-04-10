@@ -17,7 +17,8 @@ def create_person_list(person_list: list) -> list:
             person.wife = wife
             wife.husband = person
         elif person_data.get("husband") is not None:
-            husband = find_person_by_name(person_data.get("husband"), result_list)
+            husband_data = person_data.get("husband")
+            husband = find_person_by_name(husband_data, result_list)
             person.husband = husband
             husband.wife = person
     return result_list
