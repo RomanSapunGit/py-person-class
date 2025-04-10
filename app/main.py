@@ -7,28 +7,23 @@ class Person:
         Person.people[name] = self
 
 
-def create_person_list(people: list) -> list:
+def create_person_list(person_list: list) -> list:
     result_list = [Person(name=person["name"], age=person["age"])
-                   for person in people]
+                   for person in person_list]
     for index, person in enumerate(result_list):
-        spouse = people[index]
-        if spouse.get("wife") is not None:
-            wife = result_list[
-                find_person_by_name(person.name, result_list)
-            ]
+        person_data = person_list[index]
+        if person_data.get("wife") is not None:
+            wife = find_person_by_name(person_data["name"], result_list)
             person.wife = wife
             wife.husband = person
-        elif spouse.get("husband") is not None:
-            husband = result_list[
-                find_person_by_name(person.name, result_list)
-            ]
+        elif person_data.get("husband") is not None:
+            husband = find_person_by_name(person_data["name"], result_list)
             person.husband = husband
             husband.wife = person
     return result_list
 
 
-def find_person_by_name(name: str, people: list) -> int:
-    for index in range(len(people)):
-        if people[index].name == name:
-            return index
-    return -1
+def find_person_by_name(name: str, person_list: list) -> Person:
+    for person in person_list:
+        if person.name == name:
+            return person
