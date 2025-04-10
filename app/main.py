@@ -13,11 +13,11 @@ def create_person_list(person_list: list) -> list:
     for index, person in enumerate(result_list):
         person_data = person_list[index]
         if person_data.get("wife") is not None:
-            wife = find_person_by_name(person_data["name"], result_list)
+            wife = find_person_by_name(person_data.get("wife"), result_list)
             person.wife = wife
             wife.husband = person
         elif person_data.get("husband") is not None:
-            husband = find_person_by_name(person_data["name"], result_list)
+            husband = find_person_by_name(person_data.get("husband"), result_list)
             person.husband = husband
             husband.wife = person
     return result_list
